@@ -1,8 +1,88 @@
-﻿@{
+﻿@model WebAppProvaIBM.Models.InformacoesDTO 
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col col-md-12 col-lg-11 col-xl-10 ml-auto mr-auto">
+
+            @using (Html.BeginForm("Enviar", "Home", FormMethod.Post, new { id = "Form-Editar-Perfil" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="card">
+
+                    <div class="card-header" data-background-color="dark-blue">
+                        <h4 class="title">Informações para calcular INSS</h4>
+                        <p class="category">
+                            Campos marcados com <span class="text-warning">*</span> são obrigatórios
+                        </p>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="panel categoria-formulario-holder">
+
+                            <div class="categoria-header" id="dados-header">
+
+                                <h4 class="panel-title">
+                                    Dados Cadastrais
+                                </h4>
+
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="label-control">
+                                            <span class="text-warning">* </span> @Html.DisplayNameFor(m => m.Ano)
+                                        </label>
+                                        <input type="number" asp-for="Ano" class="form-control" />
+                                        <span class="text-danger" asp-validation-for="Ano"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="label-control">
+                                            <span class="text-warning">* </span> @Html.DisplayNameFor(m => m.Salario)
+                                        </label>
+                                        <input type="number" asp-for="Salario" class="form-control" />
+                                        <span class="text-danger" asp-validation-for="Salario"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <hr class="linhaBotao" />
+
+                        <div class="pull text-right">
+
+                            <button class="btn btn-primary">
+                                Enviar Dados
+                            </button>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+
+    </div>
+
 </div>

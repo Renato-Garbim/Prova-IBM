@@ -1,0 +1,17 @@
+﻿@model WebAppProvaIBM.Models.ResultadoDTO
+
+@{
+    ViewData["Title"] = "Resultado";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>O desconto encima do salário informado é de <b>R$ @Model.Desconto </b> reais .</p>
+
+<small>CLique em Home para voltar ao formulário.</small>
+
+@if (!string.IsNullOrEmpty(Model.MensagemErro))
+{
+    <h4 class="text-danger font-weight-bold">@Model.MensagemErro</h4>
+}
+
+

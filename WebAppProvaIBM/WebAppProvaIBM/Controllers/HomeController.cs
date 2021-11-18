@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using IBMServices;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,22 @@ namespace WebAppProvaIBM.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]        
+        public IActionResult Enviar(InformacoesDTO model)
+        {
+            var data = new DateTime(model.Ano, DateTime.Now.Month, DateTime.Now.Day);            
+            var servico = new CalculadorInssService();
+            var resultado = servico.CalcularDesconto(data, model.Salario);
+
+            var novaModel = new ResultadoDTO();
+            novaModel.Desconto = resultado;
+
+            if (resultado == 0) novaModel.MensagemErro = "Houve algum problema durante a execução, entre em contato com o suporte.";
+
+            return View("Resultado", novaModel);
         }
 
         public IActionResult Privacy()
